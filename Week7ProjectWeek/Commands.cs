@@ -49,24 +49,19 @@ namespace Week7ProjectWeek.ResourceLibrary
         {
             foreach (Students.Student student in this.students)
             {
-                //StringBuilder students = new StringBuilder();
-                //for(int i = 1; i<students.Length; i++)
-                //builder.Append(i).Append(" ");
-                //Console.WriteLine(students
                 Console.WriteLine("\t\t\t" + student.Name);
             }
         }
 
         public void viewAvailableResources()
         {
-            Resources.Resource[] available = this.resources.available();
-            if (available.Length == 0)
+            List<Resources.Resource> available = this.resources.available();
+            if (available.Count == 0)
             {
                 Console.WriteLine("\t\t\tAll resources are checked out");
             }
             else
             {
-                //StringBuilder resource = new StringBuilder();
                 foreach (Resources.Resource resource in available)
                 {
                     Console.WriteLine("\t\t\t" + resource.Title);
@@ -107,12 +102,15 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
             if (this.resources.zeroCheckedOut(student_id))
             {
-                Console.WriteLine("\n\t\t\tNo resources are checked out to this student.");
+                StringBuilder builder = new StringBuilder();
+                builder.Append("\n\t\t\t");
+                builder.Append("No resources are checked out to this student.");
+                Console.WriteLine(builder);
             }
             else
             {
-                //StringBuilder resource = new StringBuilder();
-                Resources.Resource[] resources = this.resources.forStudentId(student_id);
+                
+                List<Resources.Resource> resources = this.resources.forStudentId(student_id);
                 foreach (Resources.Resource resource in resources)
                 {
 
@@ -230,7 +228,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             int student_id = 0;
 
-            //??StringBuilder resource = new StringBuilder();??
+            
             foreach (Students.Student student in this.students)
             {
                 if (inputName == student.Name)
