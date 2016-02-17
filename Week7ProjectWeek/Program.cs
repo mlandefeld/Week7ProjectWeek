@@ -7,10 +7,8 @@ using System.IO;
 
 namespace Week7ProjectWeek
 {
-    //TODO: View menu for view avialable resources while also using streamReader method. 
-    //TODO: Figure out StreamReader for current checked out resources. 
-    //TODO: get rid of writestream and readstream methods? 
-    //TODO: Use a dictionary for printing ID in studnet .txt file?
+    //TODO: Use a dictionary.
+    //TODO: streamWrite checked out resources to students .txt file.
     //TODO: View checked out resources from streamreader. How to implement both writing and reading? Part of view available resources menu item. 
     //TODO: For .txt file for each student: The file needs to hold student name, id #, and checked our resources (or none).
     //TODO: show list of students and resources when checking out and returning items.

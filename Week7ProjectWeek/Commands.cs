@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Week7ProjectWeek.ResourceLibrary
 {
@@ -11,11 +12,14 @@ namespace Week7ProjectWeek.ResourceLibrary
     {
         public Students.CollectionS students;
         public Resources.CollectionR resources;
+        public string resourceFile = "Currently_Checked_Out.txt";
 
         public Commands()
         {
             students = new Students.CollectionS();
             resources = new Resources.CollectionR();
+            
+            this.WriteStream();
         }
 
         public void Dictionary()
@@ -33,21 +37,14 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void WriteStream()
         {
-            StreamWriter writer = new StreamWriter("Currently_Checked_Out.txt");
+            StreamWriter writer = new StreamWriter(this.resourceFile, false);
 
             writer.WriteLine();
+            writer.Close();
         }
 
         public void ReadStream()
         {
-            StringBuilder menu = new StringBuilder();
-            menu.Append("\n\tMenu: Enter a number to select the corresponding option\n\t");
-            menu.Append("1.View Students\n\t");
-            menu.Append("2.View Available Resources\n\t");
-            menu.Append("3.View Student Accounts\n\t");
-            menu.Append("4.Checkout Items\n\t");
-            menu.Append("5.Return Items\n\t");
-            menu.Append("6.Exit");
 
             string viewStream = Console.ReadLine();
 
@@ -56,8 +53,16 @@ namespace Week7ProjectWeek.ResourceLibrary
                 if (viewStream == "Yes")
                 {
                     Console.Clear();
-                    Console.WriteLine(menu);
-                    Console.ReadLine();
+                    string line;
+                    using (StreamReader reader = new StreamReader(this.resourceFile))
+                    {
+                        line = reader.ReadLine();
+                    }
+                    Console.WriteLine(line);
+                    break;
+                }
+                else if (viewStream == "No")
+                {
                     break;
                 }
                 else
@@ -67,14 +72,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                     viewStream = Console.ReadLine();
                 }
             }
-
-            //how to get checked out resources here? 
-            string line;
-            using (StreamReader reader = new StreamReader("Currently_Checked_Out.txt"))
-            {
-                line = reader.ReadLine();
-            }
-            Console.WriteLine(line);
+            
 
         }
 
@@ -101,7 +99,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
             }
 
-            Console.WriteLine("\n\t\tDo you want to view currently checked out resources? \n\t\tEnter \"Yes\" or select a menu item below");
+            Console.WriteLine("\n\t\tDo you want to view currently checked out resources? \n\t\tEnter \"Yes\" or \"No\"");
 
             ReadStream();
 
@@ -194,23 +192,33 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
-            int student_id = 0;
+            Students.Student currentStudent = null;
 
             foreach (Students.Student student in this.students)
             {
-                if (inputName == student.Name)
+                if (inputName == student.Name)//TODO: make this case insensitive
                 {
-                    student_id = student.Id;
+                    currentStudent = student;
                 }
             }
+
+            //get student names here to student.Name below can be used
 
             Resources.Resource resource = this.resources.findByTitle(inputTitle);
 
             if (resource.isAvailable())
             {
-                if (this.resources.hasLessThanThree(student_id))
+                if (this.resources.hasLessThanThree(currentStudent.id))
                 {
-                    resource.checkout(student_id);
+                    resource.checkout(currentStudent.id);
+                    StreamWriter writer = new StreamWriter(this.resourceFile, true);
+                    writer.WriteLine(resource.Title);
+                    writer.Close();
+
+                    StreamWriter writerStudent = new StreamWriter(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt", true);
+                    writerStudent.WriteLine(resource.Title);
+                    writerStudent.Close();
+
                     Console.WriteLine("\n\t\t" + inputName + " checked out " + resource.Title + ".");
                 }
                 else
