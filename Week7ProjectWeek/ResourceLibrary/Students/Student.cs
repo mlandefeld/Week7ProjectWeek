@@ -17,10 +17,6 @@ namespace Week7ProjectWeek.ResourceLibrary.Students
             id = idnew;
         }
 
-
-        /// <summary>
-        /// getter and setter for titles
-        /// </summary>
         public string Name
         {
             get
@@ -33,9 +29,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Students
             }
         }
 
-        /// <summary>
-        /// getter and setter assign number to name
-        /// </summary>
+
         public int Id
         {
             get

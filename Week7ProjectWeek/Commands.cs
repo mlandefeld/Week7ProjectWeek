@@ -18,25 +18,59 @@ namespace Week7ProjectWeek.ResourceLibrary
             resources = new Resources.CollectionR();
         }
 
-        public void writeFile()
+        public void Dictionary()
         {
-            List<string> student = new List<string>();
-            student.Add("AA");
-            student.Add("BB");
-            student.Add("CC");
-            student.Add("DD");
-            student.Add("EE");
-            student.Add("FF");
+            Dictionary<string, int> studentID = new Dictionary<string, int>();
+            studentID.Add("Amy Apple", 1);
+            studentID.Add("Betty Blue",2);
+            studentID.Add("Chris Collins", 3);
+            studentID.Add("Joe Jones",4);
+            studentID.Add("Matt Martins", 5);
+            studentID.Add("Susy Student",6);
 
-            StreamWriter writer = new StreamWriter(student+".txt");
 
         }
 
-        public void readStream()
+        public void WriteStream()
         {
-            string checkedOut = "Currently_Checked_Out";
+            StreamWriter writer = new StreamWriter("Currently_Checked_Out.txt");
+
+            writer.WriteLine();
+        }
+
+        public void ReadStream()
+        {
+            StringBuilder menu = new StringBuilder();
+            menu.Append("\n\tMenu: Enter a number to select the corresponding option\n\t");
+            menu.Append("1.View Students\n\t");
+            menu.Append("2.View Available Resources\n\t");
+            menu.Append("3.View Student Accounts\n\t");
+            menu.Append("4.Checkout Items\n\t");
+            menu.Append("5.Return Items\n\t");
+            menu.Append("6.Exit");
+
+            string viewStream = Console.ReadLine();
+
+            while (true)
+            {
+                if (viewStream == "Yes")
+                {
+                    Console.Clear();
+                    Console.WriteLine(menu);
+                    Console.ReadLine();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
+                    viewStream = Console.ReadLine();
+                }
+            }
+
+            //how to get checked out resources here? 
             string line;
-            using (StreamReader reader = new StreamReader(checkedOut+".txt"))
+            using (StreamReader reader = new StreamReader("Currently_Checked_Out.txt"))
             {
                 line = reader.ReadLine();
             }
@@ -44,8 +78,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         }
 
-
-        public void viewStudents()
+        public void ViewStudents()
         {
             foreach (Students.Student student in this.students)
             {
@@ -53,7 +86,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
         }
 
-        public void viewAvailableResources()
+        public void ViewAvailableResources()
         {
             List<Resources.Resource> available = this.resources.available();
             if (available.Count == 0)
@@ -67,10 +100,15 @@ namespace Week7ProjectWeek.ResourceLibrary
                     Console.WriteLine("\t\t\t" + resource.Title);
                 }
             }
+
+            Console.WriteLine("\n\t\tDo you want to view currently checked out resources? \n\t\tEnter \"Yes\" or select a menu item below");
+
+            ReadStream();
+
         }
 
 
-        public void viewStudentAccounts()
+        public void ViewStudentAccounts()
         {
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
@@ -85,7 +123,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
                 else
                 {
-                    Console.WriteLine("\tError: Request Unavailable");
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
                     inputName = Console.ReadLine();
                 }
 
@@ -102,10 +141,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
             if (this.resources.zeroCheckedOut(student_id))
             {
-                StringBuilder builder = new StringBuilder();
-                builder.Append("\n\t\t\t");
-                builder.Append("No resources are checked out to this student.");
-                Console.WriteLine(builder);
+                Console.WriteLine("\n\t\t\tNo resources are checked out to this student.");
             }
             else
             {
@@ -121,7 +157,7 @@ namespace Week7ProjectWeek.ResourceLibrary
         }
 
 
-        public void checkoutItem()
+        public void CheckoutItem()
         {
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
@@ -134,7 +170,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
                 else
                 {
-                    Console.WriteLine("\tError: Request Unavailable");
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
                     inputName = Console.ReadLine();
                 }
 
@@ -150,7 +187,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
                 else
                 {
-                    Console.WriteLine("\tError: Request Unavailable");
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
                     inputTitle = Console.ReadLine();
                 }
 
@@ -183,14 +221,16 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
             else
             {
-                Console.WriteLine("\tError: Request Unavailable");
+                Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                Console.Write("\t");
+                inputTitle = Console.ReadLine();
             }
 
 
 
         }
 
-        public void returnItem()
+        public void ReturnItem()
         {
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
@@ -203,7 +243,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
                 else
                 {
-                    Console.WriteLine("\tError: Request Unavailable");
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
                     inputName = Console.ReadLine();
                 }
 
@@ -220,7 +261,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
                 else
                 {
-                    Console.WriteLine("\tError: Request Unavailable");
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
                     inputTitle = Console.ReadLine();
                 }
 
@@ -246,11 +288,14 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
             else
             {
-                Console.WriteLine("\n\tError: Request Unavailable");
+                Console.WriteLine("\n\tError: Request Unavailable. Please try again!");
+                Console.Write("\t");
+                inputTitle = Console.ReadLine();
+
             }
         }
 
-        public static void exit()
+        public static void Exit()
         {
             Console.Clear();
             Console.WriteLine("\n\tThank you for using We Can Code IT's Bootcamp Library Checkout System!\n");

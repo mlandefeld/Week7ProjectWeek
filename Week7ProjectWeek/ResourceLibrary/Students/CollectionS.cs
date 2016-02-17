@@ -29,9 +29,27 @@ namespace Week7ProjectWeek.ResourceLibrary.Students
 
             this.students = students;
 
-            foreach(Student student in this.students)
+
+            Dictionary<string, int> studentID = new Dictionary<string, int>();
+            studentID.Add("Amy Apple", 1);
+            studentID.Add("Betty Blue", 2);
+            studentID.Add("Chris Collins", 3);
+            studentID.Add("Joe Jones", 4);
+            studentID.Add("Matt Martins", 5);
+            studentID.Add("Susy Student", 6);
+
+            foreach (Student student in this.students)
             {
                 StreamWriter writer = new StreamWriter(Regex.Replace(student.Name, @"\s+", "") +".txt");
+                writer.WriteLine(student.Name);
+
+                foreach (int value in studentID.Values)
+                {
+                    writer.WriteLine("Student ID number: " +value);
+                }
+
+
+                writer.WriteLine("Student has checked out: ");//write checked out resources for each student
 
             }
             

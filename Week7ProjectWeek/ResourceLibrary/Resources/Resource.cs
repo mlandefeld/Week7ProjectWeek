@@ -28,12 +28,6 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             return available;
         }
 
-        /// <summary>
-        /// This function assigns the student-id to the resource. Sets availability to false. 
-        /// </summary>
-        /// <returns>
-        /// This function returns true if it succeeds or false if it fails.
-        /// </returns>
         public bool checkout(int studentid)
         {
             try
@@ -49,12 +43,6 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             return true;
         }
 
-        /// <summary>
-        /// This function makes the resource available again. Sets availability to true.
-        /// </summary>
-        /// <returns>
-        /// This function returns true if it succeeds or false if it fails. 
-        /// </returns>
         public bool checkin()
         {
             try
@@ -70,10 +58,6 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             return true;
         }
 
-
-        /// <summary>
-        /// getter and setter for titles
-        /// </summary>
         public string Title
         {
             get
@@ -85,9 +69,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
                 title = value;
             }
         }
-        /// <summary>
-        /// getter and setter for available attribute
-        /// </summary>
+
         public bool Available
         {
             get
