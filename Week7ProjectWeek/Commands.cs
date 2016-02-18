@@ -148,7 +148,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
 
-            int student_id = 0;
+
 
             while (true)
             {
@@ -166,22 +166,16 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
 
 
-            foreach (Students.Student student in this.students)
-            {
-                //make case insensitive?
-                if (inputName == student.Name)//inputName.Equals(student.Name,StringComparison.CurrentCulture)
-                {
-                    student_id = student.Id;
-                }
-            }
-            if (this.resources.zeroCheckedOut(student_id))
+            Students.Student currentStudent = this.students.findByName(inputName);
+
+            if (this.resources.zeroCheckedOut(currentStudent.id))
             {
                 Console.WriteLine("\n\t\t\tNo resources are checked out to this student.");
             }
             else
             {
                 
-                List<Resources.Resource> resources = this.resources.forStudentId(student_id);
+                List<Resources.Resource> resources = this.resources.forStudentId(currentStudent.id);
                 foreach (Resources.Resource resource in resources)
                 {
 
@@ -200,7 +194,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             while (true)
             {
-                if (this.students.hasName(inputName))//ignore case problem here? 
+                if (this.students.hasName(inputName))
                 {
                     break;
                 }
@@ -213,12 +207,12 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
-           // ResourceDictionary();
+            ResourceDictionary();
             Console.Write("\tEnter Title of Resource: ");
             string inputTitle = Console.ReadLine();
             while (true)
             {
-                if (this.resources.hasTitle(inputTitle))//inputName.Equals(student.Name, StringComparison.CurrentCultureIgnoreCase)
+                if (this.resources.hasTitle(inputTitle))
                 {
                     break;
                 }
@@ -231,21 +225,13 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
-            Students.Student currentStudent = null;
-
-            foreach (Students.Student student in this.students)
-            {
-                if (inputName == student.Name)
-                {
-                    currentStudent = student;
-                }
-            }
+            Students.Student currentStudent = this.students.findByName(inputName);
 
             Resources.Resource resource = this.resources.findByTitle(inputTitle);
 
             if (resource.isAvailable())
             {
-                if (this.resources.hasLessThanThree(currentStudent.id))//ignore case error here
+                if (this.resources.hasLessThanThree(currentStudent.id))
                 {
                     resource.checkout(currentStudent.id);
                     StreamWriter writer = new StreamWriter(this.resourceFile, true);
@@ -282,7 +268,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             while (true)
             {
-                if (this.students.hasName(inputName))//ignore case problem here?
+                if (this.students.hasName(inputName))
                 {
                     break;
                 }
@@ -300,7 +286,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             while (true)
             {
-                if (this.resources.hasTitle(inputTitle))//ignore case problem here?
+                if (this.resources.hasTitle(inputTitle))
                 {
                     break;
                 }
@@ -313,22 +299,48 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
-            int student_id = 0;
 
-            
-            foreach (Students.Student student in this.students)
-            {
-                if (inputName == student.Name)//ignore case problem here?
-                {
-                    student_id = student.Id;
-                }
-            }
+            Students.Student currentStudent = this.students.findByName(inputName);
 
             Resources.Resource resource = this.resources.findByTitle(inputTitle);
 
-            if (resource.isCheckedOutBy(student_id))
+            if (resource.isCheckedOutBy(currentStudent.id))
             {
                 resource.checkin();
+
+                string line = null;
+                using (StreamReader reader = new StreamReader(this.resourceFile))
+                {
+                    using (StreamWriter writer = new StreamWriter(this.resourceFile + "sdf.txt"))
+                    {
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            if (String.Compare(line, resource.Title) == 0)
+                                continue;
+
+                            writer.WriteLine(line);
+                        }
+                    }
+                }
+                System.IO.File.Delete(this.resourceFile);
+                System.IO.File.Move(this.resourceFile + "sdf.txt", this.resourceFile);
+
+                using (StreamReader reader = new StreamReader(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt"))
+                {
+                    using (StreamWriter writer = new StreamWriter(Regex.Replace(currentStudent.Name, @"\s+", "") + "slek.txt"))
+                    {
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            if (String.Compare(line, resource.Title) == 0)
+                                continue;
+
+                            writer.WriteLine(line);
+                        }
+                    }
+                }
+                System.IO.File.Delete(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
+                System.IO.File.Move(Regex.Replace(currentStudent.Name, @"\s+", "") + "slek.txt", Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
+
                 Console.WriteLine("\n\t\t" + inputName + " returned " + resource.Title + ".");
             }
             else

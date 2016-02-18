@@ -7,11 +7,7 @@ using System.IO;
 
 namespace Week7ProjectWeek
 {
-    //TODO: Currently checked out incorrectly shows resources that have been returned
-    //TODO: Make sure streamwriter can handle checked out and returned
-    //TODO: Ignore case for student name checkout. hasName method in CollectionS -- Where is this used for ignore case. 
-    //TODO: fix book can be checked out twice if lower or uppercase is used twice.
-    //TODO: show list of students and resources when checking out and returning items? 
+    //TODO: show list of students and resources when checking out and returning items
     //TODO: Find a way to break the program. 
 
     class Program

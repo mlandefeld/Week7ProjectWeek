@@ -57,6 +57,11 @@ namespace Week7ProjectWeek.ResourceLibrary.Students
             return false;
         }
 
+        public Student findByName(string name)
+        {
+            return this.students.Where(c => c.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase)).First();
+        }
+
         public IEnumerator GetEnumerator()
         {
             return this.students.GetEnumerator();
