@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Week7ProjectWeek
 {
-    //TODO: show list of students and resources when checking out and returning items
+    //TODO: print message if resource is already checked out or if user is trying to return a resource they did not check out.
     //TODO: Find a way to break the program. 
 
     class Program

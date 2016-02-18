@@ -56,6 +56,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             titleList.Add(10, "SQL Queries");
             titleList.Add(11, "The C# Player's Guide");
 
+            Console.WriteLine("\t******************************************");
             Console.WriteLine("\tEnter a title from the following list: ");
             foreach (string value in titleList.Values)
             {
@@ -82,7 +83,10 @@ namespace Week7ProjectWeek.ResourceLibrary
                 if (viewStream.Equals("Yes", StringComparison.CurrentCultureIgnoreCase))
                 {
                     Console.Clear();
-                    Console.WriteLine("Library Resources Currently Checked Out:");
+                    string s = "Bootcamp Library Checkout System";
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(s);
+                    Console.WriteLine("\n\tLibrary Resources Currently Checked Out:");
                     string line;
                     StreamReader reader = new StreamReader(this.resourceFile);
                     using (reader)
@@ -90,7 +94,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                         line = reader.ReadLine();
                         while (line != null)
                         {
-                            Console.WriteLine(line);
+                            Console.WriteLine("\t" +line);
                             line = reader.ReadLine();
                         }
                     }
@@ -147,8 +151,6 @@ namespace Week7ProjectWeek.ResourceLibrary
             StudentDictionary();
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
-
-
 
             while (true)
             {
@@ -263,6 +265,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void ReturnItem()
         {
+            StudentDictionary();
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
 
@@ -281,6 +284,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
+            ResourceDictionary();
             Console.Write("\tEnter Title of Resource to Return: ");
             string inputTitle = Console.ReadLine();
 
