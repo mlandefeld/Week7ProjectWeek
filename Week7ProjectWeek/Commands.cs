@@ -22,16 +22,46 @@ namespace Week7ProjectWeek.ResourceLibrary
             this.WriteStream();
         }
 
-        public void Dictionary()
+        public void StudentDictionary()
         {
-            Dictionary<string, int> studentID = new Dictionary<string, int>();
-            studentID.Add("Amy Apple", 1);
-            studentID.Add("Betty Blue",2);
-            studentID.Add("Chris Collins", 3);
-            studentID.Add("Joe Jones",4);
-            studentID.Add("Matt Martins", 5);
-            studentID.Add("Susy Student",6);
+            Dictionary<int, string> nameList = new Dictionary<int, string>();
+            nameList.Add(1,"Amy Apple");
+            nameList.Add(2, "Betty Blue");
+            nameList.Add(3, "Chris Collins");
+            nameList.Add(4, "Joe Jones");
+            nameList.Add(5, "Matt Martins");
+            nameList.Add(6, "Susy Student");
 
+            Console.WriteLine("\tEnter a name from the following list: ");
+            foreach(string value in nameList.Values)
+            {
+                Console.WriteLine("\t" +value);
+            }
+            Console.WriteLine("\t******************************************");
+
+        }
+
+        public void ResourceDictionary()
+        {
+           Dictionary<int, string> titleList = new Dictionary<int, string>();
+            titleList.Add(1, "ASP.NET MVC 5");
+            titleList.Add(2, "Assembly Language Tutor");
+            titleList.Add(3, "C#");
+            titleList.Add(4, "C# 5.0 for Dummies");
+            titleList.Add(5, "Database Design");
+            titleList.Add(6, "Eloquent JavaScript");
+            titleList.Add(7, "Essential C# 6.0");
+            titleList.Add(8, "JavaScript for Kids");
+            titleList.Add(9, "Mastering C Pointers");
+            titleList.Add(10, "SQL Queries");
+            titleList.Add(11, "The C# Player's Guide");
+
+            Console.WriteLine("\tEnter a title from the following list: ");
+            foreach (string value in titleList.Values)
+            {
+                Console.WriteLine("\t" + value);
+            }
+            Console.WriteLine("\t******************************************");
 
         }
 
@@ -44,24 +74,31 @@ namespace Week7ProjectWeek.ResourceLibrary
         }
 
         public void ReadStream()
-        {
-
+        {  
             string viewStream = Console.ReadLine();
 
             while (true)
             {
-                if (viewStream == "Yes")
+                if (viewStream.Equals("Yes", StringComparison.CurrentCultureIgnoreCase))
                 {
                     Console.Clear();
+                    Console.WriteLine("Library Resources Currently Checked Out:");
                     string line;
-                    using (StreamReader reader = new StreamReader(this.resourceFile))
+                    StreamReader reader = new StreamReader(this.resourceFile);
+                    using (reader)
                     {
                         line = reader.ReadLine();
+                        while (line != null)
+                        {
+                            Console.WriteLine(line);
+                            line = reader.ReadLine();
+                        }
                     }
+   
                     Console.WriteLine(line);
                     break;
                 }
-                else if (viewStream == "No")
+                else if (viewStream.Equals("No", StringComparison.CurrentCultureIgnoreCase))
                 {
                     break;
                 }
@@ -99,8 +136,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
             }
 
-            Console.WriteLine("\n\t\tDo you want to view currently checked out resources? \n\t\tEnter \"Yes\" or \"No\"");
-
+            Console.Write("\n\t\tDo you want to view currently checked out resources? \n\t\tEnter \"Yes\" or \"No\": ");
             ReadStream();
 
         }
@@ -108,6 +144,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void ViewStudentAccounts()
         {
+            StudentDictionary();
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
 
@@ -131,8 +168,8 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             foreach (Students.Student student in this.students)
             {
-
-                if (inputName == student.Name)
+                //make case insensitive?
+                if (inputName == student.Name)//inputName.Equals(student.Name,StringComparison.CurrentCulture)
                 {
                     student_id = student.Id;
                 }
@@ -148,7 +185,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                 foreach (Resources.Resource resource in resources)
                 {
 
-                    Console.WriteLine("\t\t" + resource.Title);
+                    Console.WriteLine("\tChecked out resource: " + resource.Title);
                 }
             }
 
@@ -157,12 +194,13 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void CheckoutItem()
         {
+            StudentDictionary();
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
 
             while (true)
             {
-                if (this.students.hasName(inputName))
+                if (this.students.hasName(inputName))//ignore case problem here? 
                 {
                     break;
                 }
@@ -175,11 +213,12 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
+           // ResourceDictionary();
             Console.Write("\tEnter Title of Resource: ");
             string inputTitle = Console.ReadLine();
             while (true)
             {
-                if (this.resources.hasTitle(inputTitle))
+                if (this.resources.hasTitle(inputTitle))//inputName.Equals(student.Name, StringComparison.CurrentCultureIgnoreCase)
                 {
                     break;
                 }
@@ -196,19 +235,17 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             foreach (Students.Student student in this.students)
             {
-                if (inputName == student.Name)//TODO: make this case insensitive
+                if (inputName == student.Name)
                 {
                     currentStudent = student;
                 }
             }
 
-            //get student names here to student.Name below can be used
-
             Resources.Resource resource = this.resources.findByTitle(inputTitle);
 
             if (resource.isAvailable())
             {
-                if (this.resources.hasLessThanThree(currentStudent.id))
+                if (this.resources.hasLessThanThree(currentStudent.id))//ignore case error here
                 {
                     resource.checkout(currentStudent.id);
                     StreamWriter writer = new StreamWriter(this.resourceFile, true);
@@ -245,7 +282,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             while (true)
             {
-                if (this.students.hasName(inputName))
+                if (this.students.hasName(inputName))//ignore case problem here?
                 {
                     break;
                 }
@@ -263,7 +300,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             while (true)
             {
-                if (this.resources.hasTitle(inputTitle))
+                if (this.resources.hasTitle(inputTitle))//ignore case problem here?
                 {
                     break;
                 }
@@ -281,7 +318,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             
             foreach (Students.Student student in this.students)
             {
-                if (inputName == student.Name)
+                if (inputName == student.Name)//ignore case problem here?
                 {
                     student_id = student.Id;
                 }
@@ -306,7 +343,7 @@ namespace Week7ProjectWeek.ResourceLibrary
         public static void Exit()
         {
             Console.Clear();
-            Console.WriteLine("\n\tThank you for using We Can Code IT's Bootcamp Library Checkout System!\n");
+            Console.WriteLine("\nThank you for using We Can Code IT's Bootcamp Library Checkout System!\n");
             Environment.Exit(0);
         }
     }

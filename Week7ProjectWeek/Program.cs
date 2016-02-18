@@ -7,24 +7,25 @@ using System.IO;
 
 namespace Week7ProjectWeek
 {
-    //TODO: Use a dictionary.
-    //TODO: streamWrite checked out resources to students .txt file.
-    //TODO: View checked out resources from streamreader. How to implement both writing and reading? Part of view available resources menu item. 
-    //TODO: For .txt file for each student: The file needs to hold student name, id #, and checked our resources (or none).
-    //TODO: show list of students and resources when checking out and returning items.
+    //TODO: Currently checked out incorrectly shows resources that have been returned
+    //TODO: Make sure streamwriter can handle checked out and returned
+    //TODO: Ignore case for student name checkout. hasName method in CollectionS -- Where is this used for ignore case. 
+    //TODO: fix book can be checked out twice if lower or uppercase is used twice.
+    //TODO: show list of students and resources when checking out and returning items? 
+    //TODO: Find a way to break the program. 
 
     class Program
     {
         static void Main(string[] args)
         {
-            /*
+            
             if (Console.BackgroundColor == ConsoleColor.Black)
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
                 Console.Clear();
             }
-            */
+            
             Console.Title = "Bootcamp Library Checkout System";
             string s = "Bootcamp Library Checkout System";
             Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
@@ -93,7 +94,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder four = new StringBuilder();
                     four.Append("Bootcamp Library Checkout System");
-                    four.Append("\n\n\t\t\tCheckout Item:\n\t\t\t***********************");
+                    four.Append("\n\n\t\t\tCheckout Item:\n\t\t\t***************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(four);
                     commandInterface.CheckoutItem();
@@ -106,7 +107,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder five = new StringBuilder();
                     five.Append("Bootcamp Library Checkout System");
-                    five.Append("\n\n\t\t\tReturn Item:\n\t\t\t***********************");
+                    five.Append("\n\n\t\t\tReturn Item:\n\t\t\t***************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(five);
                     commandInterface.ReturnItem();

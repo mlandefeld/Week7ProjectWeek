@@ -29,20 +29,12 @@ namespace Week7ProjectWeek.ResourceLibrary.Students
 
             this.students = students;
 
-            /*
-            Dictionary<string, int> studentID = new Dictionary<string, int>();
-            studentID.Add("Amy Apple", 1);
-            studentID.Add("Betty Blue", 2);
-            studentID.Add("Chris Collins", 3);
-            studentID.Add("Joe Jones", 4);
-            studentID.Add("Matt Martins", 5);
-            studentID.Add("Susy Student", 6);
-            */
-
             foreach (Student student in this.students)
             {
                 StreamWriter writer = new StreamWriter(Regex.Replace(student.Name, @"\s+", "") +".txt", false);
-                writer.WriteLine(student.Name);
+                writer.WriteLine("Library System Account Information");
+                writer.WriteLine("**********************************");
+                writer.WriteLine("Student Name: " + student.Name);
                 writer.WriteLine("Student ID: " + student.id);
                 writer.WriteLine("Student has checked out: ");
                 writer.Close();
@@ -50,6 +42,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Students
             
         }
 
+        //use this instead of student.Name in checkout? 
         public bool hasName(string name)
         {
             foreach (Students.Student student in this.students)

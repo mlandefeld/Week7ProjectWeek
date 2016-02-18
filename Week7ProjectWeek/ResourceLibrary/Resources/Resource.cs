@@ -23,6 +23,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
         {
             return this.student_id == studentid;
         }
+
         public bool isAvailable()
         {
             return available;
