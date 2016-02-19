@@ -24,16 +24,16 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void StudentDictionary()
         {
-            Dictionary<int, string> nameList = new Dictionary<int, string>();
-            nameList.Add(1,"Amy Apple");
-            nameList.Add(2, "Betty Blue");
-            nameList.Add(3, "Chris Collins");
-            nameList.Add(4, "Joe Jones");
-            nameList.Add(5, "Matt Martins");
-            nameList.Add(6, "Susy Student");
+            Dictionary<int, string> studentName = new Dictionary<int, string>();
+            studentName.Add(1,"Amy Apple");
+            studentName.Add(2, "Betty Blue");
+            studentName.Add(3, "Chris Collins");
+            studentName.Add(4, "Joe Jones");
+            studentName.Add(5, "Matt Martins");
+            studentName.Add(6, "Susy Student");
 
             Console.WriteLine("\tEnter a name from the following list: ");
-            foreach(string value in nameList.Values)
+            foreach(string value in studentName.Values)
             {
                 Console.WriteLine("\t" +value);
             }
@@ -43,22 +43,22 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void ResourceDictionary()
         {
-           Dictionary<int, string> titleList = new Dictionary<int, string>();
-            titleList.Add(1, "ASP.NET MVC 5");
-            titleList.Add(2, "Assembly Language Tutor");
-            titleList.Add(3, "C#");
-            titleList.Add(4, "C# 5.0 for Dummies");
-            titleList.Add(5, "Database Design");
-            titleList.Add(6, "Eloquent JavaScript");
-            titleList.Add(7, "Essential C# 6.0");
-            titleList.Add(8, "JavaScript for Kids");
-            titleList.Add(9, "Mastering C Pointers");
-            titleList.Add(10, "SQL Queries");
-            titleList.Add(11, "The C# Player's Guide");
+           Dictionary<int, string> titleName = new Dictionary<int, string>();
+            titleName.Add(1, "ASP.NET MVC 5");
+            titleName.Add(2, "Assembly Language Tutor");
+            titleName.Add(3, "C#");
+            titleName.Add(4, "C# 5.0 for Dummies");
+            titleName.Add(5, "Database Design");
+            titleName.Add(6, "Eloquent JavaScript");
+            titleName.Add(7, "Essential C# 6.0");
+            titleName.Add(8, "JavaScript for Kids");
+            titleName.Add(9, "Mastering C Pointers");
+            titleName.Add(10, "SQL Queries");
+            titleName.Add(11, "The C# Player's Guide");
 
             Console.WriteLine("\t******************************************");
             Console.WriteLine("\tEnter a title from the following list: ");
-            foreach (string value in titleList.Values)
+            foreach (string value in titleName.Values)
             {
                 Console.WriteLine("\t" + value);
             }
@@ -96,9 +96,11 @@ namespace Week7ProjectWeek.ResourceLibrary
                         {
                             Console.WriteLine("\t" +line);
                             line = reader.ReadLine();
+                            
                         }
+
                     }
-   
+
                     Console.WriteLine(line);
                     break;
                 }
@@ -113,8 +115,6 @@ namespace Week7ProjectWeek.ResourceLibrary
                     viewStream = Console.ReadLine();
                 }
             }
-            
-
         }
 
         public void ViewStudents()
@@ -228,38 +228,38 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
 
             Students.Student currentStudent = this.students.findByName(inputName);
-
             Resources.Resource resource = this.resources.findByTitle(inputTitle);
 
-            if (resource.isAvailable())
+            while (true)//error does not loop. is this the wrong place to loop?
             {
-                if (this.resources.hasLessThanThree(currentStudent.id))
+                if (resource.isAvailable())
                 {
-                    resource.checkout(currentStudent.id);
-                    StreamWriter writer = new StreamWriter(this.resourceFile, true);
-                    writer.WriteLine(resource.Title);
-                    writer.Close();
+                    if (this.resources.hasLessThanThree(currentStudent.id))
+                    {
+                        resource.checkout(currentStudent.id);
+                        StreamWriter writer = new StreamWriter(this.resourceFile, true);
+                        writer.WriteLine(resource.Title);
+                        writer.Close();
 
-                    StreamWriter writerStudent = new StreamWriter(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt", true);
-                    writerStudent.WriteLine(resource.Title);
-                    writerStudent.Close();
+                        StreamWriter writerStudent = new StreamWriter(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt", true);
+                        writerStudent.WriteLine(resource.Title);
+                        writerStudent.Close();
 
-                    Console.WriteLine("\n\t\t" + inputName + " checked out " + resource.Title + ".");
+                        Console.WriteLine("\n\t\t" + inputName + " checked out " + resource.Title + ".");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\t" + inputName + " has checked out the max number of resources.");
+                    }
+                    
                 }
                 else
                 {
-                    Console.WriteLine(inputName + " has checked out the max number of resources.");
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
+                    inputTitle = Console.ReadLine();
                 }
-
             }
-            else
-            {
-                Console.WriteLine("\tError: Request Unavailable. Please try again!");
-                Console.Write("\t");
-                inputTitle = Console.ReadLine();
-            }
-
-
 
         }
 
@@ -307,8 +307,14 @@ namespace Week7ProjectWeek.ResourceLibrary
             Students.Student currentStudent = this.students.findByName(inputName);
 
             Resources.Resource resource = this.resources.findByTitle(inputTitle);
+            
+            
+            if (this.resources.zeroCheckedOut(currentStudent.id))
+            {
+                Console.WriteLine("\n\t\t\tNo resources are checked out to this student.");
 
-            if (resource.isCheckedOutBy(currentStudent.id))
+            }
+            else if (resource.isCheckedOutBy(currentStudent.id))
             {
                 resource.checkin();
 
@@ -326,8 +332,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                         }
                     }
                 }
-                System.IO.File.Delete(this.resourceFile);
-                System.IO.File.Move(this.resourceFile + "sdf.txt", this.resourceFile);
+                File.Delete(this.resourceFile);
+                File.Move(this.resourceFile + "sdf.txt", this.resourceFile);
 
                 using (StreamReader reader = new StreamReader(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt"))
                 {

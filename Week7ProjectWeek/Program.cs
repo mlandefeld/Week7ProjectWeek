@@ -7,14 +7,17 @@ using System.IO;
 
 namespace Week7ProjectWeek
 {
+    //TODO: need to have student files in debug immediately when program is run. 
     //TODO: print message if resource is already checked out or if user is trying to return a resource they did not check out.
-    //TODO: Find a way to break the program. 
+    //TODO: If student is trying to check out same book twice, error does not take in other title. 
+    //TODO: See line 233 in commands.cs for while looping error. 
 
     class Program
     {
         static void Main(string[] args)
         {
             
+
             if (Console.BackgroundColor == ConsoleColor.Black)
             {
                 Console.BackgroundColor = ConsoleColor.White;
