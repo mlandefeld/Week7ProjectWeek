@@ -70,6 +70,7 @@ namespace Week7ProjectWeek.ResourceLibrary
         {
             StreamWriter writer = new StreamWriter(this.resourceFile, false);
 
+            writer.WriteLine("All Currently Checked Out Library Resources:");
             writer.WriteLine();
             writer.Close();
         }
@@ -86,7 +87,6 @@ namespace Week7ProjectWeek.ResourceLibrary
                     string s = "Bootcamp Library Checkout System";
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(s);
-                    Console.WriteLine("\n\tLibrary Resources Currently Checked Out:");
                     string line;
                     StreamReader reader = new StreamReader(this.resourceFile);
                     using (reader)
@@ -214,7 +214,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             string inputTitle = Console.ReadLine();
             while (true)
             {
-                if (this.resources.hasTitle(inputTitle))
+                if (this.resources.hasTitle(inputTitle) && this.resources.findByTitle(inputTitle).isAvailable())
                 {
                     break;
                 }
@@ -230,36 +230,27 @@ namespace Week7ProjectWeek.ResourceLibrary
             Students.Student currentStudent = this.students.findByName(inputName);
             Resources.Resource resource = this.resources.findByTitle(inputTitle);
 
-            while (true)//error does not loop. is this the wrong place to loop?
+
+
+            if (this.resources.hasLessThanThree(currentStudent.id))
             {
-                if (resource.isAvailable())
-                {
-                    if (this.resources.hasLessThanThree(currentStudent.id))
-                    {
-                        resource.checkout(currentStudent.id);
-                        StreamWriter writer = new StreamWriter(this.resourceFile, true);
-                        writer.WriteLine(resource.Title);
-                        writer.Close();
+                resource.checkout(currentStudent.id);
+                StreamWriter writer = new StreamWriter(this.resourceFile, true);
+                writer.WriteLine(resource.Title);
+                writer.Close();
 
-                        StreamWriter writerStudent = new StreamWriter(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt", true);
-                        writerStudent.WriteLine(resource.Title);
-                        writerStudent.Close();
+                StreamWriter writerStudent = new StreamWriter(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt", true);
+                writerStudent.WriteLine(resource.Title);
+                writerStudent.Close();
 
-                        Console.WriteLine("\n\t\t" + inputName + " checked out " + resource.Title + ".");
-                    }
-                    else
-                    {
-                        Console.WriteLine("\t" + inputName + " has checked out the max number of resources.");
-                    }
-                    
-                }
-                else
-                {
-                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
-                    Console.Write("\t");
-                    inputTitle = Console.ReadLine();
-                }
+                Console.WriteLine("\n\t\t" + inputName + " checked out " + resource.Title + ".");
             }
+            else
+            {
+                Console.WriteLine("\t" + inputName + " has checked out the max number of resources.");
+            }
+                 
+            
 
         }
 
@@ -348,8 +339,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                         }
                     }
                 }
-                System.IO.File.Delete(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
-                System.IO.File.Move(Regex.Replace(currentStudent.Name, @"\s+", "") + "slek.txt", Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
+                File.Delete(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
+                File.Move(Regex.Replace(currentStudent.Name, @"\s+", "") + "slek.txt", Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
 
                 Console.WriteLine("\n\t\t" + inputName + " returned " + resource.Title + ".");
             }

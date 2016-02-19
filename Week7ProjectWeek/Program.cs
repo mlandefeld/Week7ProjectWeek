@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Week7ProjectWeek
 {
@@ -16,7 +17,6 @@ namespace Week7ProjectWeek
     {
         static void Main(string[] args)
         {
-            
 
             if (Console.BackgroundColor == ConsoleColor.Black)
             {
@@ -39,9 +39,10 @@ namespace Week7ProjectWeek
             menu.Append("5.Return Items\n\t");
             menu.Append("6.Exit");
             
+            
+            ResourceLibrary.Commands commandInterface = new ResourceLibrary.Commands();
             Console.WriteLine(menu);
             string input = Console.ReadLine();
-            ResourceLibrary.Commands commandInterface = new ResourceLibrary.Commands();
             while (true)
             {
                 if (input.Equals("exit", StringComparison.CurrentCultureIgnoreCase))
