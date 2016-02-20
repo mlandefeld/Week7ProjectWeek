@@ -274,6 +274,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
 
             }
+            Students.Student currentStudent = this.students.findByName(inputName);
 
             ResourceDictionary();
             Console.Write("\tEnter Title of Resource to Return: ");
@@ -283,7 +284,16 @@ namespace Week7ProjectWeek.ResourceLibrary
             {
                 if (this.resources.hasTitle(inputTitle))
                 {
-                    break;
+                    if(!this.resources.findByTitle(inputTitle).isAvailable() && this.resources.findByTitle(inputTitle).isCheckedOutBy(currentStudent.id))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                        Console.Write("\t");
+                        inputTitle = Console.ReadLine();
+                    }                   
                 }
                 else
                 {
@@ -294,8 +304,6 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
-
-            Students.Student currentStudent = this.students.findByName(inputName);
 
             Resources.Resource resource = this.resources.findByTitle(inputTitle);
             
@@ -344,13 +352,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
                 Console.WriteLine("\n\t\t" + inputName + " returned " + resource.Title + ".");
             }
-            else
-            {
-                Console.WriteLine("\n\tError: Request Unavailable. Please try again!");
-                Console.Write("\t");
-                inputTitle = Console.ReadLine();
-
-            }
+            
         }
 
         public static void Exit()

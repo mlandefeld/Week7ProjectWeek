@@ -8,10 +8,8 @@ using System.Text.RegularExpressions;
 
 namespace Week7ProjectWeek
 {
-    //TODO: need to have student files in debug immediately when program is run. 
-    //TODO: print message if resource is already checked out or if user is trying to return a resource they did not check out.
-    //TODO: If student is trying to check out same book twice, error does not take in other title. 
-    //TODO: See line 233 in commands.cs for while looping error. 
+
+    //TODO: does not loop and does not let you return book if you tupe in an error the first time. 
 
     class Program
     {
