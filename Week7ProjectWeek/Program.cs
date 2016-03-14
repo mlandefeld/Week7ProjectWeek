@@ -7,10 +7,10 @@ using System.IO;
 
 namespace Week7ProjectWeek
 {
-    //TODO: need to have student files in debug immediately when program is run. 
-    //TODO: print message if resource is already checked out or if user is trying to return a resource they did not check out.
-    //TODO: If student is trying to check out same book twice, error does not take in other title. 
-    //TODO: See line 233 in commands.cs for while looping error. 
+    //TODO: Three resources of each category. one file for each type and one for all of them.
+    //TODO: Override three methods from resources
+
+
 
     class Program
     {
@@ -32,12 +32,14 @@ namespace Week7ProjectWeek
 
             StringBuilder menu = new StringBuilder();
             menu.Append("\n\tMenu: Enter a number to select the corresponding option\n\t");
-            menu.Append("1.View Students\n\t");
+            menu.Append("1.View All Resources\n\t");
             menu.Append("2.View Available Resources\n\t");
-            menu.Append("3.View Student Accounts\n\t");
-            menu.Append("4.Checkout Items\n\t");
-            menu.Append("5.Return Items\n\t");
-            menu.Append("6.Exit");
+            menu.Append("3.Edit Resources\n\t");
+            menu.Append("4.View Student Accounts\n\t");
+            menu.Append("5.View All Students\n\t");
+            menu.Append("6.Check Out Resource\n\t");
+            menu.Append("7.Check In Resource\n\t");
+            menu.Append("8.Exit");
             
             Console.WriteLine(menu);
             string input = Console.ReadLine();
@@ -51,9 +53,62 @@ namespace Week7ProjectWeek
                 else if (input == "1")
                 {
                     Console.Clear();
+                    StringBuilder two = new StringBuilder();
+                    two.Append("Bootcamp Library Checkout System");
+                    two.Append("\n\n\t\t\tAll Resources:\n\t\t\t***************************");
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(two);
+                    //commandInterface.ViewAllResources();
+                    Console.WriteLine(menu);
+                    input = Console.ReadLine();
+                    continue;
+                }
+                else if (input == "2")
+                {
+                    Console.Clear();
+                    StringBuilder two = new StringBuilder();
+                    two.Append("Bootcamp Library Checkout System");
+                    two.Append("\n\n\t\t\tAvailable Resources:\n\t\t\t***************************");
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(two);
+                    //commandInterface.ViewAvailableResources();
+                    Console.WriteLine(menu);
+                    input = Console.ReadLine();
+                    continue;
+                }
+                else if (input == "3")
+                {
+                    Console.Clear();
+                    StringBuilder two = new StringBuilder();
+                    two.Append("Bootcamp Library Checkout System");
+                    two.Append("\n\n\t\t\tEdit Resources:\n\t\t\t***************************");
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(two);
+                    //commandInterface.EditResources();
+                    Console.WriteLine(menu);
+                    input = Console.ReadLine();
+                    continue;
+                }
+                else if (input == "4")
+                {
+                    Console.Clear();
+                    StringBuilder three = new StringBuilder();
+                    three.Append("Bootcamp Library Checkout System");
+                    three.Append("\n\n\t\t\tStudent Accounts:\n\t\t\t**************************");
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(three);
+                    commandInterface.ViewStudentAccounts();
+                    Console.WriteLine(menu);
+                    input = Console.ReadLine();
+                    continue;
+
+                }
+                else if (input == "5")
+                {
+                    Console.Clear();
                     StringBuilder one = new StringBuilder();
                     one.Append("Bootcamp Library Checkout System");
-                    one.Append("\n\n\t\t\tList of Students:\n\t\t\t****************");
+                    one.Append("\n\n\t\t\tAll Students:\n\t\t\t****************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(one);
                     commandInterface.ViewStudents();
@@ -62,38 +117,13 @@ namespace Week7ProjectWeek
                     continue;
 
                 }
-                else if (input == "2")
-                {
-                    Console.Clear();
-                    StringBuilder two = new StringBuilder();
-                    two.Append("Bootcamp Library Checkout System");
-                    two.Append("\n\n\t\t\tList of Available Resources:\n\t\t\t***************************");
-                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
-                    Console.WriteLine(two);
-                    commandInterface.ViewAvailableResources();
-                    Console.WriteLine(menu);
-                    input = Console.ReadLine();
-                    continue;
-                }
-                else if (input == "3")
-                {
-                    Console.Clear();
-                    StringBuilder three = new StringBuilder();
-                    three.Append("Bootcamp Library Checkout System");
-                    three.Append("\n\n\t\t\tView Student Accounts:\n\t\t\t**************************");
-                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
-                    Console.WriteLine(three);
-                    commandInterface.ViewStudentAccounts();
-                    Console.WriteLine(menu);
-                    input = Console.ReadLine();
-                    continue;
-                }
-                else if (input == "4")
+                
+                else if (input == "6")
                 {
                     Console.Clear();
                     StringBuilder four = new StringBuilder();
                     four.Append("Bootcamp Library Checkout System");
-                    four.Append("\n\n\t\t\tCheckout Item:\n\t\t\t***************");
+                    four.Append("\n\n\t\t\tCheck Out Resource:\n\t\t\t***************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(four);
                     commandInterface.CheckoutItem();
@@ -101,12 +131,12 @@ namespace Week7ProjectWeek
                     input = Console.ReadLine();
                     continue;
                 }
-                else if (input == "5")
+                else if (input == "7")
                 {
                     Console.Clear();
                     StringBuilder five = new StringBuilder();
                     five.Append("Bootcamp Library Checkout System");
-                    five.Append("\n\n\t\t\tReturn Item:\n\t\t\t***************");
+                    five.Append("\n\n\t\t\tCheck In Item:\n\t\t\t***************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(five);
                     commandInterface.ReturnItem();
@@ -114,7 +144,7 @@ namespace Week7ProjectWeek
                     input = Console.ReadLine();
                     continue;
                 }
-                else if (input == "6")
+                else if (input == "8")
                 {
                     ResourceLibrary.Commands.Exit();
                 }

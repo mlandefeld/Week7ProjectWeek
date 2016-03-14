@@ -14,6 +14,25 @@ namespace Week7ProjectWeek.ResourceLibrary
         public Resources.CollectionR resources;
         public string resourceFile = "Currently_Checked_Out.txt";
 
+        /* //from polymorphism project
+        public List<Resource> resources;
+
+        public Commands()
+        {
+            List<Resource> objects = new List<Resource>();
+            objects.Add(new DVD("DVD Title", 100, 1));
+            objects.Add(new Book("Book Title", 200, 2));
+            objects.Add(new Magazine("Magazine Title", 300, 3));
+
+            this.resources = objects;
+        }
+
+        public List<Resource> Resources
+        {
+            get { return this.resources; }
+        }
+        */
+
         public Commands()
         {
             students = new Students.CollectionS();
@@ -124,17 +143,17 @@ namespace Week7ProjectWeek.ResourceLibrary
                 Console.WriteLine("\t\t\t" + student.Name);
             }
         }
-
+        /*
         public void ViewAvailableResources()
         {
-            List<Resources.Resource> available = this.resources.available();
+            List<Resources.Resources> available = this.resources.available();
             if (available.Count == 0)
             {
                 Console.WriteLine("\t\t\tAll resources are checked out");
             }
             else
             {
-                foreach (Resources.Resource resource in available)
+                foreach (Resources.Resources resource in available)
                 {
                     Console.WriteLine("\t\t\t" + resource.Title);
                 }
@@ -144,6 +163,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             ReadStream();
 
         }
+        */
 
 
         public void ViewStudentAccounts()
@@ -176,9 +196,9 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
             else
             {
-                
-                List<Resources.Resource> resources = this.resources.forStudentId(currentStudent.id);
-                foreach (Resources.Resource resource in resources)
+
+                List<Resources.Resources> resources = null; //this.resources.forStudentId(currentStudent.id);
+                foreach (Resources.Resources resource in resources)
                 {
 
                     Console.WriteLine("\tChecked out resource: " + resource.Title);
@@ -228,9 +248,9 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
 
             Students.Student currentStudent = this.students.findByName(inputName);
-            Resources.Resource resource = this.resources.findByTitle(inputTitle);
+            Resources.Resources resource = this.resources.findByTitle(inputTitle);
 
-            while (true)//error does not loop. is this the wrong place to loop?
+            while (true)
             {
                 if (resource.isAvailable())
                 {
@@ -306,7 +326,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             Students.Student currentStudent = this.students.findByName(inputName);
 
-            Resources.Resource resource = this.resources.findByTitle(inputTitle);
+            Resources.Resources resource = this.resources.findByTitle(inputTitle);
             
             
             if (this.resources.zeroCheckedOut(currentStudent.id))

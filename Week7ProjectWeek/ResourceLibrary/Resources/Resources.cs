@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Week7ProjectWeek.ResourceLibrary.Resources
 {
-    class Resource
+    abstract class Resources
     {
         public string title = "";
         public bool available = true;
         public int? id = null;
         public int? student_id = null;
 
-        public Resource(string name, int newID)
+        public Resources(string name, int newID)
         {
             this.id = newID;
             this.title = name;
@@ -59,7 +59,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             return true;
         }
 
-        public string Title
+        public virtual string Title
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             }
         }
 
-        public bool Available
+        public virtual bool Available
         {
             get
             {
@@ -83,7 +83,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             }
         }
 
-        public int? Id
+        public virtual int? Id
         {
             get
             {

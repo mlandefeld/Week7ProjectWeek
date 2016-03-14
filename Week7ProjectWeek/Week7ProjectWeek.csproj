@@ -48,8 +48,11 @@
     <Compile Include="Commands.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceLibrary\Magazine.cs" />
+    <Compile Include="ResourceLibrary\Resources\Book.cs" />
     <Compile Include="ResourceLibrary\Resources\CollectionR.cs" />
-    <Compile Include="ResourceLibrary\Resources\Resource.cs" />
+    <Compile Include="ResourceLibrary\Resources\DVD.cs" />
+    <Compile Include="ResourceLibrary\Resources\Resources.cs" />
     <Compile Include="ResourceLibrary\Students\CollectionS.cs" />
     <Compile Include="ResourceLibrary\Students\Student.cs" />
   </ItemGroup>
