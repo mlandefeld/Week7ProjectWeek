@@ -12,16 +12,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
 
         public Book(string newDvd, int newID) : base(newDvd, newID)
         {
-            this.id = newID;
-            this.title = newDvd;
 
-            List<Book> books = new List<Book>();
-
-            books.Add(new Book("ASP.NET MVC 5", 1));
-            books.Add(new Book("Assembly Language Tutor", 2));
-            books.Add(new Book("C#", 3));
-
-            this.books = books;
         }
 
     }

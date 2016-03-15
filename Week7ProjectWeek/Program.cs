@@ -14,8 +14,7 @@ namespace Week7ProjectWeek
     {
         static void Main(string[] args)
         {
-            
-
+           
             if (Console.BackgroundColor == ConsoleColor.Black)
             {
                 Console.BackgroundColor = ConsoleColor.White;
@@ -37,14 +36,19 @@ namespace Week7ProjectWeek
                 "6.Check Out Resources\n\t" +
                 "7.Check In Resources\n\t" +
                 "8.Exit";
-            
+
+
             Console.WriteLine(menu);
-            string input = Console.ReadLine();
+
             ResourceLibrary.Commands commandInterface = new ResourceLibrary.Commands();
+
+
+            string input = Console.ReadLine();
             while (true)
             {
-                if (input == "1") //stack overflow exception
+                if (input == "1")
                 {
+                    
                     Console.Clear();
                     StringBuilder two = new StringBuilder();
                     two.Append("Bootcamp Library Checkout System");

@@ -39,61 +39,6 @@ namespace Week7ProjectWeek.ResourceLibrary
             resources = new Resources.CollectionR();
             
             this.WriteStream();
-            this.ResourceDictionary();
-        }
-
-        public void StudentDictionary()
-        {
-            Dictionary<int, string> studentName = new Dictionary<int, string>();
-            studentName.Add(1,"Amy Apple");
-            studentName.Add(2, "Betty Blue");
-            studentName.Add(3, "Chris Collins");
-            studentName.Add(4, "Joe Jones");
-            studentName.Add(5, "Matt Martins");
-            studentName.Add(6, "Susy Student");
-
-            Console.WriteLine("\tEnter a name from the following list: ");
-            foreach(string value in studentName.Values)
-            {
-                Console.WriteLine("\t" +value);
-            }
-            Console.WriteLine("\t******************************************");
-
-        }
-
-        public void ResourceDictionary()
-        {
-            Dictionary<string, string> titleName = new Dictionary<string, string>();
-            titleName.Add("ASP.NET MVC 5", "(Book)");
-            titleName.Add("Assembly Language Tutor", "(Book)");
-            titleName.Add("C#", "(Book)");
-            titleName.Add("A Movie", "(DVD)");
-            titleName.Add("Another Movie", "(DVD)");
-            titleName.Add("A Different Movie", "(DVD)");
-            titleName.Add("Programming for Muggles", "(Magazine)");
-            titleName.Add("C# Celebs", "(Magazine)");
-            titleName.Add("CSS Fashion", "(Magazine)");
-
-            using (StreamWriter writer = new StreamWriter("AllResources.txt")) //is any of the following correct?
-            {
-                foreach (var allResources in titleName)
-                {
-                    writer.WriteLine(allResources);
-                }
-                writer.Close();
-            }
-            
-
-            /*
-            Console.WriteLine("\t******************************************");
-            Console.WriteLine("\tEnter a title from the following list: ");
-            foreach (string value in titleName.Values)
-            {
-                Console.WriteLine("\t" + value);
-            }
-            Console.WriteLine("\t******************************************");
-            */
-
         }
 
         public void WriteStream()
@@ -149,7 +94,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void ViewAllResources()
         {
-            StreamReader reader = new StreamReader("AllResources.txt");
+            StreamReader allResources = new StreamReader("AllResources.txt");
         }
 
         public void EditResources()
@@ -190,7 +135,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void ViewStudentAccounts()
         {
-            StudentDictionary();
+            //list student names and validate by number
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
 
@@ -218,7 +163,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
             else
             {
-                List<Resources.Resources> resources = null; //this.resources.forStudentId(currentStudent.id);
+                List<Resources.Resources> resources = this.resources.forStudentId(currentStudent.id);
                 foreach (Resources.Resources resource in resources)
                 {
 
@@ -231,7 +176,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void CheckoutItem()
         {
-            StudentDictionary();
+            //list student names by number
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
 
@@ -250,7 +195,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
-            //ResourceDictionary(); - this has changed
+            //list of resources validate by number
             Console.Write("\tEnter Title of Resource: ");
             string inputTitle = Console.ReadLine();
             while (true)
@@ -306,7 +251,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void ReturnItem()
         {
-            StudentDictionary();
+            //list of students validate by number
             Console.Write("\tEnter Student Name: ");
             string inputName = Console.ReadLine();
 
