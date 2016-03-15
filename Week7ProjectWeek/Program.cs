@@ -10,8 +10,6 @@ namespace Week7ProjectWeek
     //TODO: Three resources of each category. one file for each type and one for all of them.
     //TODO: Override three methods from resources
 
-
-
     class Program
     {
         static void Main(string[] args)
@@ -30,35 +28,30 @@ namespace Week7ProjectWeek
             Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
             Console.WriteLine(s);
 
-            StringBuilder menu = new StringBuilder();
-            menu.Append("\n\tMenu: Enter a number to select the corresponding option\n\t");
-            menu.Append("1.View All Resources\n\t");
-            menu.Append("2.View Available Resources\n\t");
-            menu.Append("3.Edit Resources\n\t");
-            menu.Append("4.View Student Accounts\n\t");
-            menu.Append("5.View All Students\n\t");
-            menu.Append("6.Check Out Resource\n\t");
-            menu.Append("7.Check In Resource\n\t");
-            menu.Append("8.Exit");
+            string menu = "\n\tMenu: Enter a number to select the corresponding option\n\t"+
+                "1.View All Resources\n\t"+
+                "2.View Available Resources\n\t"+
+                "3.Edit Resources\n\t" +
+                "4.View Student Accounts\n\t" +
+                "5.View All Students\n\t" +
+                "6.Check Out Resources\n\t" +
+                "7.Check In Resources\n\t" +
+                "8.Exit";
             
             Console.WriteLine(menu);
             string input = Console.ReadLine();
             ResourceLibrary.Commands commandInterface = new ResourceLibrary.Commands();
             while (true)
             {
-                if (input.Equals("exit", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    ResourceLibrary.Commands.Exit();
-                }
-                else if (input == "1")
+                if (input == "1") //stack overflow exception
                 {
                     Console.Clear();
                     StringBuilder two = new StringBuilder();
                     two.Append("Bootcamp Library Checkout System");
-                    two.Append("\n\n\t\t\tAll Resources:\n\t\t\t***************************");
+                    two.Append("\n\n\t\t\tAll Resources:\n\t\t\t*******************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(two);
-                    //commandInterface.ViewAllResources();
+                    commandInterface.ViewAllResources();
                     Console.WriteLine(menu);
                     input = Console.ReadLine();
                     continue;
@@ -68,7 +61,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder two = new StringBuilder();
                     two.Append("Bootcamp Library Checkout System");
-                    two.Append("\n\n\t\t\tAvailable Resources:\n\t\t\t***************************");
+                    two.Append("\n\n\t\t\tAvailable Resources:\n\t\t\t***********************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(two);
                     //commandInterface.ViewAvailableResources();
@@ -81,10 +74,10 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder two = new StringBuilder();
                     two.Append("Bootcamp Library Checkout System");
-                    two.Append("\n\n\t\t\tEdit Resources:\n\t\t\t***************************");
+                    two.Append("\n\n\t\t\tEdit Resources:\n\t\t\t*************************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(two);
-                    //commandInterface.EditResources();
+                    commandInterface.EditResources();
                     Console.WriteLine(menu);
                     input = Console.ReadLine();
                     continue;
@@ -103,7 +96,7 @@ namespace Week7ProjectWeek
                     continue;
 
                 }
-                else if (input == "5")
+                else if (input == "5") //stack overflow exception
                 {
                     Console.Clear();
                     StringBuilder one = new StringBuilder();
@@ -115,7 +108,6 @@ namespace Week7ProjectWeek
                     Console.WriteLine(menu);
                     input = Console.ReadLine();
                     continue;
-
                 }
                 
                 else if (input == "6")
@@ -123,7 +115,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder four = new StringBuilder();
                     four.Append("Bootcamp Library Checkout System");
-                    four.Append("\n\n\t\t\tCheck Out Resource:\n\t\t\t***************");
+                    four.Append("\n\n\t\t\tCheck Out Resources:\n\t\t\t***************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(four);
                     commandInterface.CheckoutItem();
@@ -136,7 +128,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder five = new StringBuilder();
                     five.Append("Bootcamp Library Checkout System");
-                    five.Append("\n\n\t\t\tCheck In Item:\n\t\t\t***************");
+                    five.Append("\n\n\t\t\tCheck In Resources:\n\t\t\t***************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(five);
                     commandInterface.ReturnItem();

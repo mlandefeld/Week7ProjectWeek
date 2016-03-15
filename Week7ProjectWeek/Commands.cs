@@ -39,6 +39,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             resources = new Resources.CollectionR();
             
             this.WriteStream();
+            this.ResourceDictionary();
         }
 
         public void StudentDictionary()
@@ -62,19 +63,28 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void ResourceDictionary()
         {
-           Dictionary<int, string> titleName = new Dictionary<int, string>();
-            titleName.Add(1, "ASP.NET MVC 5");
-            titleName.Add(2, "Assembly Language Tutor");
-            titleName.Add(3, "C#");
-            titleName.Add(4, "C# 5.0 for Dummies");
-            titleName.Add(5, "Database Design");
-            titleName.Add(6, "Eloquent JavaScript");
-            titleName.Add(7, "Essential C# 6.0");
-            titleName.Add(8, "JavaScript for Kids");
-            titleName.Add(9, "Mastering C Pointers");
-            titleName.Add(10, "SQL Queries");
-            titleName.Add(11, "The C# Player's Guide");
+            Dictionary<string, string> titleName = new Dictionary<string, string>();
+            titleName.Add("ASP.NET MVC 5", "(Book)");
+            titleName.Add("Assembly Language Tutor", "(Book)");
+            titleName.Add("C#", "(Book)");
+            titleName.Add("A Movie", "(DVD)");
+            titleName.Add("Another Movie", "(DVD)");
+            titleName.Add("A Different Movie", "(DVD)");
+            titleName.Add("Programming for Muggles", "(Magazine)");
+            titleName.Add("C# Celebs", "(Magazine)");
+            titleName.Add("CSS Fashion", "(Magazine)");
 
+            using (StreamWriter writer = new StreamWriter("AllResources.txt")) //is any of the following correct?
+            {
+                foreach (var allResources in titleName)
+                {
+                    writer.WriteLine(allResources);
+                }
+                writer.Close();
+            }
+            
+
+            /*
             Console.WriteLine("\t******************************************");
             Console.WriteLine("\tEnter a title from the following list: ");
             foreach (string value in titleName.Values)
@@ -82,6 +92,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                 Console.WriteLine("\t" + value);
             }
             Console.WriteLine("\t******************************************");
+            */
 
         }
 
@@ -136,8 +147,19 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
         }
 
+        public void ViewAllResources()
+        {
+            StreamReader reader = new StreamReader("AllResources.txt");
+        }
+
+        public void EditResources()
+        {
+
+        }
+
         public void ViewStudents()
         {
+            //ReadStream from file
             foreach (Students.Student student in this.students)
             {
                 Console.WriteLine("\t\t\t" + student.Name);
@@ -196,7 +218,6 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
             else
             {
-
                 List<Resources.Resources> resources = null; //this.resources.forStudentId(currentStudent.id);
                 foreach (Resources.Resources resource in resources)
                 {
@@ -229,7 +250,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
-            ResourceDictionary();
+            //ResourceDictionary(); - this has changed
             Console.Write("\tEnter Title of Resource: ");
             string inputTitle = Console.ReadLine();
             while (true)
@@ -304,7 +325,7 @@ namespace Week7ProjectWeek.ResourceLibrary
 
             }
 
-            ResourceDictionary();
+            //ResourceDictionary(); - method has changed
             Console.Write("\tEnter Title of Resource to Return: ");
             string inputTitle = Console.ReadLine();
 
@@ -368,8 +389,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                         }
                     }
                 }
-                System.IO.File.Delete(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
-                System.IO.File.Move(Regex.Replace(currentStudent.Name, @"\s+", "") + "slek.txt", Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
+                File.Delete(Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
+                File.Move(Regex.Replace(currentStudent.Name, @"\s+", "") + "slek.txt", Regex.Replace(currentStudent.Name, @"\s+", "") + ".txt");
 
                 Console.WriteLine("\n\t\t" + inputName + " returned " + resource.Title + ".");
             }

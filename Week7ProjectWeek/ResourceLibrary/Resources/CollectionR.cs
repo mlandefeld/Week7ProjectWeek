@@ -16,8 +16,6 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
         public CollectionR()
         {
             List<Book> books = new List<Book>();
-
-
             books.Add(new Book("ASP.NET MVC 5", 1));
             books.Add(new Book("Assembly Language Tutor",2));
             books.Add(new Book("C#",3));
