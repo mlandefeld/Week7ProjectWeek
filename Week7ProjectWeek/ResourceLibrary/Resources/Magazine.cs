@@ -15,5 +15,10 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
            
         }
 
+        public override void OtherResources()
+        {
+            Console.WriteLine("This is a magazine.");
+        }
+
     }
 }

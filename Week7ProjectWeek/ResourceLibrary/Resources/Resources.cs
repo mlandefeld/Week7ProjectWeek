@@ -59,7 +59,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             return true;
         }
 
-        public virtual string Title
+        public string Title
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             }
         }
 
-        public virtual bool Available
+        public bool Available
         {
             get
             {
@@ -83,7 +83,7 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             }
         }
 
-        public virtual int? Id
+        public int? Id
         {
             get
             {
@@ -95,5 +95,24 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             }
         }
 
+        public virtual void EditFields()
+        {
+            Console.WriteLine("\tWhich resource do you wish to edit?");
+            string resource = Console.ReadLine();
+            Console.WriteLine("\tEnter the field you wish to edit:");
+            Console.WriteLine("\t1.Title\n\t2.ISBN\n\t3.Length (pages)");
+            int input = int.Parse(Console.ReadLine());
+           
+        }
+
+        public virtual void OtherResources()
+        {
+            Console.WriteLine("Override this in a derived class.");
+        }
+
+        public virtual void ThisIsAMethod()
+        {
+            Console.WriteLine("Override this too.");
+        }
     }
 }

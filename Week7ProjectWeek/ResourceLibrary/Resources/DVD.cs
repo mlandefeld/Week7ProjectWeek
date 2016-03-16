@@ -15,7 +15,15 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
            
         }
 
-        
+        public override void EditFields()
+        {
+            Console.WriteLine("\tWhich resource do you wish to edit?");
+            string resource = Console.ReadLine();
+            Console.WriteLine("\tEnter the field you wish to edit:");
+            Console.WriteLine("\t1.Title\n\t2.ISBN\n\t3.Length (minutes)");
+            int input = int.Parse(Console.ReadLine());
+        }
+
 
     }
 }

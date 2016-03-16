@@ -34,12 +34,11 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
 
         public void WriteFile()
         {
-            StreamWriter allResources = new StreamWriter("AllResources.txt");
+            StreamWriter allResources = new StreamWriter("All_Resources.txt");
             foreach (Resources resource in this.resources)
             {
                 allResources.WriteLine(resource.Title +" (" + resource.GetType().Name + ")");
             }
-            
             allResources.Close();
         }
 

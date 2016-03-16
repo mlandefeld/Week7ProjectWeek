@@ -39,6 +39,8 @@ namespace Week7ProjectWeek.ResourceLibrary.Students
                 writer.WriteLine("Student has checked out: ");
                 writer.Close();
             }
+
+            this.WriteFile();
             
         }
 
@@ -55,6 +57,16 @@ namespace Week7ProjectWeek.ResourceLibrary.Students
             }
 
             return false;
+        }
+
+        public void WriteFile()
+        {
+            StreamWriter allStudents = new StreamWriter("All_Students.txt");
+            foreach (Student student in this.students)
+            {
+                allStudents.WriteLine(student.Name);
+            }
+            allStudents.Close();
         }
 
         public Student findByName(string name)

@@ -9,6 +9,10 @@ namespace Week7ProjectWeek
 {
     //TODO: Three resources of each category. one file for each type and one for all of them.
     //TODO: Override three methods from resources
+    //TODO: Edit resource options and update list (is this possible?)
+    //TODO: Checking out resources is incorrect. 
+    //TODO: Instantiate each derived resource class as an object
+    //TODO: How to hold info for edit fields - include in list? 
 
     class Program
     {
@@ -52,7 +56,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder two = new StringBuilder();
                     two.Append("Bootcamp Library Checkout System");
-                    two.Append("\n\n\t\t\tAll Resources:\n\t\t\t*******************");
+                    two.Append("\n\n\t\t\tAll Resources:\n\t\t******************************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(two);
                     commandInterface.ViewAllResources();
@@ -65,10 +69,10 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder two = new StringBuilder();
                     two.Append("Bootcamp Library Checkout System");
-                    two.Append("\n\n\t\t\tAvailable Resources:\n\t\t\t***********************");
+                    two.Append("\n\n\t\t\tAvailable Resources:\n\t\t***********************************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(two);
-                    //commandInterface.ViewAvailableResources();
+                    commandInterface.ViewAvailableResources();
                     Console.WriteLine(menu);
                     input = Console.ReadLine();
                     continue;
@@ -78,7 +82,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder two = new StringBuilder();
                     two.Append("Bootcamp Library Checkout System");
-                    two.Append("\n\n\t\t\tEdit Resources:\n\t\t\t*************************");
+                    two.Append("\n\n\t\t\tEdit Resources:\n\t\t******************************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(two);
                     commandInterface.EditResources();
@@ -91,7 +95,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder three = new StringBuilder();
                     three.Append("Bootcamp Library Checkout System");
-                    three.Append("\n\n\t\t\tStudent Accounts:\n\t\t\t**************************");
+                    three.Append("\n\n\t\t\tStudent Accounts:\n\t\t*********************************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(three);
                     commandInterface.ViewStudentAccounts();
@@ -105,7 +109,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder one = new StringBuilder();
                     one.Append("Bootcamp Library Checkout System");
-                    one.Append("\n\n\t\t\tAll Students:\n\t\t\t****************");
+                    one.Append("\n\n\t\t\tAll Students:\n\t\t**************************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(one);
                     commandInterface.ViewStudents();
@@ -119,7 +123,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder four = new StringBuilder();
                     four.Append("Bootcamp Library Checkout System");
-                    four.Append("\n\n\t\t\tCheck Out Resources:\n\t\t\t***************");
+                    four.Append("\n\n\t\t\tCheck Out Resources:\n\t\t***************************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(four);
                     commandInterface.CheckoutItem();
@@ -132,7 +136,7 @@ namespace Week7ProjectWeek
                     Console.Clear();
                     StringBuilder five = new StringBuilder();
                     five.Append("Bootcamp Library Checkout System");
-                    five.Append("\n\n\t\t\tCheck In Resources:\n\t\t\t***************");
+                    five.Append("\n\n\t\t\tCheck In Resources:\n\t\t*******************************");
                     Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     Console.WriteLine(five);
                     commandInterface.ReturnItem();

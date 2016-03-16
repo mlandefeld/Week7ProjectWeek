@@ -15,5 +15,10 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
 
         }
 
+        public override void ThisIsAMethod()
+        {
+            Console.WriteLine("These are books.");
+        }
+
     }
 }
