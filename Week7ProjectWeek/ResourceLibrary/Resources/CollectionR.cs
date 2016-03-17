@@ -40,6 +40,27 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
                 allResources.WriteLine(resource.Title +" (" + resource.GetType().Name + ")");
             }
             allResources.Close();
+
+            StreamWriter magazine = new StreamWriter("Magazine_Titles.txt");
+            magazine.WriteLine("Magazine Titles:");
+            magazine.WriteLine("Programming for Muggles");
+            magazine.WriteLine("C# Celebs");
+            magazine.WriteLine("CSS Fashion");
+            magazine.Close();
+
+            StreamWriter dvd = new StreamWriter("DVD_Titles.txt");
+            dvd.WriteLine("DVD Titles:");
+            dvd.WriteLine("A Movie");
+            dvd.WriteLine("Another Movie");
+            dvd.WriteLine("A Different Movie");
+            dvd.Close();
+
+            StreamWriter book = new StreamWriter("Book_Titles.txt");
+            book.WriteLine("Book Titles:");
+            book.WriteLine("ASP.NET MVC 5");
+            book.WriteLine("Assembly Language Tutor");
+            book.WriteLine("C#");
+            book.Close();
         }
 
         public Resources findByTitle(string title)

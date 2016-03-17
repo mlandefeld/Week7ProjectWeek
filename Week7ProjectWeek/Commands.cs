@@ -14,25 +14,6 @@ namespace Week7ProjectWeek.ResourceLibrary
         public Resources.CollectionR resources;
         public string resourceFile = "Currently_Checked_Out.txt";
 
-        /* //from polymorphism project
-        public List<Resource> resources;
-
-        public Commands()
-        {
-            List<Resource> objects = new List<Resource>();
-            objects.Add(new DVD("DVD Title", 100, 1));
-            objects.Add(new Book("Book Title", 200, 2));
-            objects.Add(new Magazine("Magazine Title", 300, 3));
-
-            this.resources = objects;
-        }
-
-        public List<Resource> Resources
-        {
-            get { return this.resources; }
-        }
-        */
-
         public Commands()
         {
             students = new Students.CollectionS();
@@ -41,7 +22,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             this.WriteStream();
         }
 
-        public void WriteStream()//currently checked out resources
+        public void WriteStream()
         {
             StreamWriter writer = new StreamWriter(this.resourceFile, false);
 
@@ -50,7 +31,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             
         }
 
-        public void ReadStream()//currently checked out resources
+        public void ReadStream()
         {  
             string viewStream = Console.ReadLine();
 
@@ -84,8 +65,21 @@ namespace Week7ProjectWeek.ResourceLibrary
 
         public void EditResources()
         {
+            string editTitle = Console.ReadLine();
+            string input = Console.ReadLine();
+            //resources.Where(w => w.Name == "height").ToList().ForEach(s => s.Value = 30);
+
+            //foreach (var mc in resources.Where(x => x.Name == "height"))
+            //  mc.Value = 30;
 
             /*
+            foreach (Resources.Resources resource in this.resources)
+            {
+                if (resource[i].Contains(editTitle))
+                    resource[i] = input;
+            }
+
+            
             Console.WriteLine("\tWhich resource do you wish to edit?");
             string resource = Console.ReadLine();
             Console.WriteLine("\tEnter the field you wish to edit:");
@@ -113,6 +107,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                     input = int.Parse(Console.ReadLine());
                 }
             }
+            
             */
         }
 
@@ -184,7 +179,7 @@ namespace Week7ProjectWeek.ResourceLibrary
         }
 
 
-        public void CheckoutItem()       //error when I input a resouce and it says checked out, but then "Try again!" error
+        public void CheckoutItem()      
         {
             Console.WriteLine("\t\t\tStudents to choose from:");
             foreach (Students.Student student in this.students)
@@ -219,7 +214,6 @@ namespace Week7ProjectWeek.ResourceLibrary
             {
                 if (this.resources.hasTitle(inputTitle))
                 {
-
                     break;
                 }
                 else
@@ -255,11 +249,11 @@ namespace Week7ProjectWeek.ResourceLibrary
                     {
                         Console.WriteLine("\t" + inputName + " has checked out the max number of resources.");
                     }
-                    
+                    break;
                 }
                 else
                 {
-                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!"); 
                     Console.Write("\t");
                     inputTitle = Console.ReadLine();
                 }
@@ -319,8 +313,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             Students.Student currentStudent = this.students.findByName(inputName);
 
             Resources.Resources resource = this.resources.findByTitle(inputTitle);
-            
-            
+
             if (this.resources.zeroCheckedOut(currentStudent.id))
             {
                 Console.WriteLine("\n\t\t\tNo resources are checked out to this student.");
@@ -370,8 +363,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                 Console.WriteLine("\n\tError: Request Unavailable. Please try again!");
                 Console.Write("\t");
                 inputTitle = Console.ReadLine();
-
             }
+            
         }
 
         public static void Exit()

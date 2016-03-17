@@ -7,12 +7,10 @@ using System.IO;
 
 namespace Week7ProjectWeek
 {
-    //TODO: Three resources of each category. one file for each type and one for all of them.
     //TODO: Override three methods from resources
-    //TODO: Edit resource options and update list (is this possible?)
-    //TODO: Checking out resources is incorrect. 
-    //TODO: Instantiate each derived resource class as an object
-    //TODO: How to hold info for edit fields - include in list? 
+    //TODO: Edit resource options and update list (how to do this?) How to hold info for edit fields
+    //TODO: Checking out resources is correct, but shows an error after.
+    //TODO: Returns error. if incorrect title first, does not loop to check out next. while loop didn't work either. 
 
     class Program
     {
@@ -41,7 +39,6 @@ namespace Week7ProjectWeek
                 "7.Check In Resources\n\t" +
                 "8.Exit";
 
-
             Console.WriteLine(menu);
 
             ResourceLibrary.Commands commandInterface = new ResourceLibrary.Commands();
@@ -52,7 +49,6 @@ namespace Week7ProjectWeek
             {
                 if (input == "1")
                 {
-                    
                     Console.Clear();
                     StringBuilder two = new StringBuilder();
                     two.Append("Bootcamp Library Checkout System");
