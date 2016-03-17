@@ -26,6 +26,7 @@ namespace Week7ProjectWeek.ResourceLibrary
         {
             StreamWriter writer = new StreamWriter(this.resourceFile, false);
 
+            writer.WriteLine("All Currently Checked Out Library Resources:");
             writer.WriteLine();
             writer.Close();
             
@@ -35,32 +36,31 @@ namespace Week7ProjectWeek.ResourceLibrary
         {  
             string viewStream = Console.ReadLine();
 
-                Console.Clear();
-                string s = "Bootcamp Library Checkout System";
-                Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
-                Console.WriteLine(s);
-                Console.WriteLine("\n\tLibrary Resources Currently Checked Out:");
-                string line;
-                StreamReader reader = new StreamReader(this.resourceFile);
-                using (reader)
-                {
-                    line = reader.ReadLine();
-                    while (line != null)
+                    Console.Clear();
+                    string s = "Bootcamp Library Checkout System";
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.WriteLine(s);
+                    string line;
+                    StreamReader reader = new StreamReader(this.resourceFile);
+                    using (reader)
                     {
-                        Console.WriteLine("\t" +line);
                         line = reader.ReadLine();
+                        while (line != null)
+                        {
+                            Console.WriteLine("\t" +line);
+                            line = reader.ReadLine();
                             
+                        }
+
                     }
 
-                }
-            
         }
 
         public void ViewAllResources()
         {
             StreamReader allResources = new StreamReader("All_Resources.txt");
             string line = allResources.ReadToEnd();
-            Console.WriteLine(line);
+                    Console.WriteLine(line);
         }
 
         public void EditResources()
@@ -117,7 +117,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             string line = allStudents.ReadToEnd();
             Console.WriteLine(line);
         }
-        
+
         public void ViewAvailableResources()
         {
             List<Resources.Resources> available = this.resources.available();
@@ -179,7 +179,7 @@ namespace Week7ProjectWeek.ResourceLibrary
         }
 
 
-        public void CheckoutItem()      
+        public void CheckoutItem()
         {
             Console.WriteLine("\t\t\tStudents to choose from:");
             foreach (Students.Student student in this.students)
@@ -212,7 +212,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             string inputTitle = Console.ReadLine();
             while (true)
             {
-                if (this.resources.hasTitle(inputTitle))
+                if (this.resources.hasTitle(inputTitle) && this.resources.findByTitle(inputTitle).isAvailable())
                 {
                     break;
                 }
@@ -228,10 +228,8 @@ namespace Week7ProjectWeek.ResourceLibrary
             Students.Student currentStudent = this.students.findByName(inputName);
             Resources.Resources resource = this.resources.findByTitle(inputTitle);
 
-            while (true)
-            {
-                if (resource.isAvailable())
-                {
+
+
                     if (this.resources.hasLessThanThree(currentStudent.id))
                     {
                         resource.checkout(currentStudent.id);
@@ -249,15 +247,8 @@ namespace Week7ProjectWeek.ResourceLibrary
                     {
                         Console.WriteLine("\t" + inputName + " has checked out the max number of resources.");
                     }
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("\tError: Request Unavailable. Please try again!"); 
-                    Console.Write("\t");
-                    inputTitle = Console.ReadLine();
-                }
-            }
+                 
+            
 
         }
 
@@ -285,6 +276,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
 
             }
+            Students.Student currentStudent = this.students.findByName(inputName);
 
             Console.WriteLine("\t\t\tResources to choose from:");
             foreach (Resources.Resources resources in this.resources)
@@ -298,7 +290,16 @@ namespace Week7ProjectWeek.ResourceLibrary
             {
                 if (this.resources.hasTitle(inputTitle))
                 {
+                    if(!this.resources.findByTitle(inputTitle).isAvailable() && this.resources.findByTitle(inputTitle).isCheckedOutBy(currentStudent.id))
+                    {
                     break;
+                }
+                else
+                {
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
+                    inputTitle = Console.ReadLine();
+                }
                 }
                 else
                 {
@@ -310,10 +311,9 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
 
 
-            Students.Student currentStudent = this.students.findByName(inputName);
-
-            Resources.Resources resource = this.resources.findByTitle(inputTitle);
-
+            Resources.Resource resource = this.resources.findByTitle(inputTitle);
+            
+            
             if (this.resources.zeroCheckedOut(currentStudent.id))
             {
                 Console.WriteLine("\n\t\t\tNo resources are checked out to this student.");
@@ -358,14 +358,8 @@ namespace Week7ProjectWeek.ResourceLibrary
 
                 Console.WriteLine("\n\t\t" + inputName + " returned " + resource.Title + ".");
             }
-            else
-            {
-                Console.WriteLine("\n\tError: Request Unavailable. Please try again!");
-                Console.Write("\t");
-                inputTitle = Console.ReadLine();
+
             }
-            
-        }
 
         public static void Exit()
         {
