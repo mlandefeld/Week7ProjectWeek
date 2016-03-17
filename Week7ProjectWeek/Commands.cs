@@ -64,40 +64,32 @@ namespace Week7ProjectWeek.ResourceLibrary
         }
 
         public void EditResources()
-        {
-            string editTitle = Console.ReadLine();
-            string input = Console.ReadLine();
-            //resources.Where(w => w.Name == "height").ToList().ForEach(s => s.Value = 30);
-
-            //foreach (var mc in resources.Where(x => x.Name == "height"))
-            //  mc.Value = 30;
-
-            /*
-            foreach (Resources.Resources resource in this.resources)
-            {
-                if (resource[i].Contains(editTitle))
-                    resource[i] = input;
-            }
-
-            
+        {          
             Console.WriteLine("\tWhich resource do you wish to edit?");
-            string resource = Console.ReadLine();
+            string resourceInput = Console.ReadLine(); //TODO: validate like below resources
             Console.WriteLine("\tEnter the field you wish to edit:");
             Console.WriteLine("\t1.Title\n\t2.ISBN\n\t3.Length");
             int input = int.Parse(Console.ReadLine());
+
+            Resources.Resources resource = this.resources.findByTitle(resourceInput);
             while (true)
             {
                 if(input == 1)
                 {
-
+                    string title = Console.ReadLine();
+                    resource.Title = title;
                     break;
                 }
                 else if(input == 2)
                 {
+                    string isbn = Console.ReadLine();
+                    resource.ISBN = isbn;
                     break;
                 }
                 else if(input == 3)
                 {
+                    string length = Console.ReadLine();
+                    resource.Length = length;
                     break;
                 }
                 else
@@ -108,7 +100,6 @@ namespace Week7ProjectWeek.ResourceLibrary
                 }
             }
             
-            */
         }
 
         public void ViewStudents()
@@ -311,7 +302,7 @@ namespace Week7ProjectWeek.ResourceLibrary
             }
 
 
-            Resources.Resource resource = this.resources.findByTitle(inputTitle);
+            Resources.Resources resource = this.resources.findByTitle(inputTitle);
             
             
             if (this.resources.zeroCheckedOut(currentStudent.id))

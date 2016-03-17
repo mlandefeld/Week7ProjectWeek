@@ -12,6 +12,8 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
         public bool available = true;
         public int? id = null;
         public int? student_id = null;
+        public string isbn = "";
+        public string length = "";
 
         public Resources(string name, int newID)
         {
@@ -80,6 +82,30 @@ namespace Week7ProjectWeek.ResourceLibrary.Resources
             set
             {
                 available = value;
+            }
+        }
+
+        public string ISBN
+        {
+            get
+            {
+                return this.isbn;
+            }
+            set
+            {
+                isbn = value;
+            }
+        }
+
+        public string Length
+        {
+            get
+            {
+                return this.length;
+            }
+            set
+            {
+                length = value;
             }
         }
 
