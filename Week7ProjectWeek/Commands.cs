@@ -64,29 +64,63 @@ namespace Week7ProjectWeek.ResourceLibrary
         }
 
         public void EditResources()
-        {          
-            Console.WriteLine("\tWhich resource do you wish to edit?");
-            string resourceInput = Console.ReadLine(); //TODO: validate like below resources
-            Console.WriteLine("\tEnter the field you wish to edit:");
+        {
+            Console.WriteLine("\t\t\tResources to choose from:");
+            foreach (Resources.Resources resources in this.resources)
+            {
+                Console.WriteLine("\t\t\t" + resources.Title);
+            }
+            Console.Write("\tWhich resource do you wish to edit? ");
+            string resourceInput = Console.ReadLine();
+            while (true)
+            {
+                if (this.resources.hasTitle(resourceInput) && this.resources.findByTitle(resourceInput).isAvailable())
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
+                    resourceInput = Console.ReadLine();
+                }
+
+            }
+            Console.WriteLine("\tEnter the number for the field you wish to edit: ");
             Console.WriteLine("\t1.Title\n\t2.ISBN\n\t3.Length");
-            int input = int.Parse(Console.ReadLine());
+            string input = Console.ReadLine();
+            while (true)
+            {
+                if (input == "1" | input == "2" | input == "3")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\tError: Request Unavailable. Please try again!");
+                    Console.Write("\t");
+                    input = Console.ReadLine();
+                }
+
+            }
+            Console.Write("\tEnter the updated input: ");
 
             Resources.Resources resource = this.resources.findByTitle(resourceInput);
             while (true)
             {
-                if(input == 1)
+                if(input == "1")
                 {
                     string title = Console.ReadLine();
                     resource.Title = title;
                     break;
                 }
-                else if(input == 2)
+                else if(input == "2")
                 {
                     string isbn = Console.ReadLine();
                     resource.ISBN = isbn;
                     break;
                 }
-                else if(input == 3)
+                else if(input == "3")
                 {
                     string length = Console.ReadLine();
                     resource.Length = length;
@@ -96,7 +130,7 @@ namespace Week7ProjectWeek.ResourceLibrary
                 {
                     Console.WriteLine("\tError: Request Unavailable. Please try again!");
                     Console.Write("\t");
-                    input = int.Parse(Console.ReadLine());
+                    input = Console.ReadLine();
                 }
             }
             
