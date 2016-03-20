@@ -7,11 +7,6 @@ using System.IO;
 
 namespace Week7ProjectWeek
 {
-    //TODO: Override three methods from resources
-    //TODO: Edit resource options and update list (how to do this?) How to hold info for edit fields
-    //TODO: Checking out resources is correct, but shows an error after.
-    //TODO: Returns error. if incorrect title first, does not loop to check out next. while loop didn't work either. 
-
     class Program
     {
         static void Main(string[] args)
@@ -100,7 +95,7 @@ namespace Week7ProjectWeek
                     continue;
 
                 }
-                else if (input == "5") //stack overflow exception
+                else if (input == "5")
                 {
                     Console.Clear();
                     StringBuilder one = new StringBuilder();
